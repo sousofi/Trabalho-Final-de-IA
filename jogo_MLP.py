@@ -113,7 +113,7 @@ def draw_button():
 def draw_board_grid():
     grid_size = 50
     for x in range(0, game_screen_width, grid_size):
-        for y in range(0, start_screen_height, grid_size):
+        for y in range(0,game_screen_height, grid_size):
             pygame.draw.rect(screen, grid_color, pygame.Rect(x, y, grid_size, grid_size), 1)
 
 # Função para desenhar a tela de início
@@ -256,8 +256,10 @@ def show_you_won():
 turned_cards = {}
 matched_cards = set()
 
-# Função para trocar para a tela principal do jogo
+recently_shown = []
+
 def main_game():
+    global recently_shown
     screen = pygame.display.set_mode((game_screen_width, game_screen_height))  # Muda para a tela maior
     pygame.display.set_caption("Jogo da Memória - Principal")
     
@@ -273,9 +275,19 @@ def main_game():
 
         if len(matched_cards) < len(cards):
             available_indices = [i for i in range(len(cards)) if i not in matched_cards]
+            
+            available_indices = [i for i in available_indices if i not in recently_shown]
+
+            if len(available_indices) < 2:
+                recently_shown = []
+                available_indices = [i for i in range(len(cards)) if i not in matched_cards]
 
             card_indices = random.sample(available_indices, 2)
             card1, card2 = card_indices[0], card_indices[1]
+
+            recently_shown.extend([card1, card2])
+            if len(recently_shown) > 2: 
+                recently_shown.pop(0)
 
             turned_cards[(card1 // 6, card1 % 6)] = card1
             turned_cards[(card2 // 6, card2 % 6)] = card2
@@ -303,7 +315,7 @@ def main_game():
                         show_popup(f"Encontrou um par: Mulher")
                 else:
                     print("Erro de classificação! Jogo Terminado.")
-                    show_popup(f"Previsão incorreta!")
+                    show_popup(f"Encontrou um par: {classes[card_genders[card1]]}")
                     time.sleep(2)
                     show_game_over()
             else:
@@ -318,6 +330,8 @@ def main_game():
         else:
             print("Todas as cartas foram combinadas. Você venceu!")
             show_you_won()
+    pygame.quit()  # Garante que o Pygame seja encerrado
+    exit() 
 
 # Loop principal que controla as telas
 def start_game_loop():
@@ -335,6 +349,7 @@ def start_game_loop():
         pygame.display.flip()
 
     pygame.quit()
+    exit()
 
 # Inicia o loop do jogo
 start_game_loop()
