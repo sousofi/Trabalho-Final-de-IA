@@ -6,7 +6,7 @@ Este projeto tem como objetivo integrar a classificação de imagens, uma aplica
     - para Linux: "python3 -m venv nome_do_ambiente" e depois "source nome_do_ambiente/bin/activate"
     - para Windows: "python -m venv nome_do_ambiente" e depois "nome_do_ambiente\Scripts\activate"
       
-- Instale as dependências executando "pip install requirements.txt" no seu ambiente virtual
+- Instale as dependências executando "pip install -r requirements.txt" no seu ambiente virtual
 
 - Baixe os modelos treinados da CNN e MLP
 
