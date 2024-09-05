@@ -12,6 +12,9 @@ Este projeto tem como objetivo integrar a classificação de imagens, uma aplica
 
 - Coloque os arquivos "jogo_MLP.py" e jogo_CNN.py" na mesma pasta dos modelos treinados e execute
 
+### Importante
+Quando o jogo é compilado, aparecem alguns warnings e mensagens do próprio sistema, mas isso não indica nenhum erro. Além disso, o MLP demora mais para compilar e gerar a interface do jogo, mas basta ter paciẽncia que no final dá tudo certo!
+
 ### Adendo
 O modelo treinado do MLP, que consiste em dois arquivos ("mlp_model.pkl" e o "scaler.pkl"), foi muito grande para colocar aqui. Portanto, foi colocado nesse drive:
 https://drive.google.com/drive/folders/1NCcnNLeifg1WdX2CCC58eiHY3XpwYzeB?usp=drive_link
